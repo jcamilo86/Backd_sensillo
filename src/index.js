@@ -1,15 +1,16 @@
 const express =require("express")
 const app = express()
-const port =3000   
+const port =  4000
+require ("dotenv").config() 
 
-app.get("/:nombre",(req,res)=>{
-res.json({nombre:req.params.nombre})
-})
 
-app.get("/", (req, res)=>{
-res.json({nombre:req.query.nombre})
-})
+//middlewares
+app.use(express.json())
 
-app.listen(port, ()=>{
+//RUTAS
+app.use("/api/users",require("./routes/user.routes"))
+
+
+app.listen(process.env.PORT, ()=>{
     console.log(`servidor corriendo: ${port}`)
 })
